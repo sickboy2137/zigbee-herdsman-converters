@@ -532,6 +532,21 @@ const devices = [
         },
     },
     {
+        zigbeeModel: ['lumi.switch.b1naus01'],
+        model: 'WS-USC03',
+        vendor: 'Xiaomi',
+        description: 'Aqara smart wall switch (neutral, single rocker)',
+        supports: 'on/off',
+        fromZigbee: [fz.on_off],
+        toZigbee: [tz.on_off],
+        meta: {configureKey: 1},
+        configure: async (device, coordinatorEndpoint) => {
+            const endpoint = device.getEndpoint(1);
+            await bind(endpoint, coordinatorEndpoint, ['genOnOff']);
+            await configureReporting.onOff(endpoint);
+        },
+    },
+    {
         zigbeeModel: ['lumi.ctrl_neutral1'],
         model: 'QBKG04LM',
         vendor: 'Xiaomi',
